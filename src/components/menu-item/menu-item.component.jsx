@@ -2,8 +2,13 @@ import React from 'react';
 
 import './menu-item.styles.scss';
 
-export const MenuItem = ({ title, imageUrl, size }) => (
-    <div className={`${size} menu-item`}>
+import { withRouter } from 'react-router-dom';
+
+export const MenuItem = ({ title, imageUrl, size, linkUrl, match, history }) => (
+    <div
+        className={`${size} menu-item`}
+        onClick={() => history.push(`${match.url}${linkUrl}`)}
+    >
         <div className="background-image" style={{
             backgroundImage: `url(${imageUrl})`
         }} />
@@ -13,3 +18,5 @@ export const MenuItem = ({ title, imageUrl, size }) => (
         </div>
     </div>
 );
+
+export default withRouter(MenuItem); //higher order component gives us access to props like match, history from the HomePage
